@@ -1,0 +1,7 @@
+{
+  "editor.tabSize": 2,
+  "go.useLanguageServer": false,
+  "go.formatTool": "goimports",
+  "go.testFlags": [ "-v", "-count=1"],
+  "go.testTimeout": "3000s"
+}

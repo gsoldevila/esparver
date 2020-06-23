@@ -1,0 +1,113 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+:root {
+  --color-primary: #29c0ff;
+  --color-accent: #38d68a;
+  --color-dark: #333333;
+  --color-gray: #dbdbdb;
+  --color-dark-gray: #666666;
+  --color-light: #f7f7f7;
+  --color-warn: #ffd829;
+  --color-error: #ff2974;
+  --toolbar-height: 50px;
+  --toolbar-height-mobile: 40px;
+}
+
+html, body { height: 100% }
+
+/* Make text non-selectable */
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-light);
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+/* Remove OS-dependant styling from form controls. Define a default font size */
+input, textarea, button, a {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+}
+
+/* None of the links should be underlined */
+a { text-decoration: none }
+
+/* Angular material minimal styling */
+mat-bottom-sheet-container {
+  background: white;
+  &.kiosk {
+    position: absolute;
+    bottom: 0;
+    right: 7em;
+  }
+}
+
+/* Lighter placeholder text color */
+::placeholder { color: var(--color-gray) }
+
+.placeholder {
+  font-style: italic;
+  color: var(--color-gray);
+}
+
+[hidden] { display: none !important }
+
+.error {
+  font-style: italic;
+  color: var(--color-error);
+}
+
+.background-dark { background-color: var(--color-dark) }
+.background-primary { background-color: var(--color-primary) }
+.background-white { background-color: white }
+.break-word { word-break: break-word }
+.line-through { text-decoration: line-through }
+.color-primary { color: var(--color-primary) }
+.color-dark { color: var(--color-dark) }
+.color-dark-gray { color: var(--color-dark-gray) }
+.color-white { color: white }
+.flex { display: flex }
+.flex-center { display: flex; align-items: center }
+.flex-column { display: flex; flex-direction: column }
+.flex-wrap { display: flex; flex-wrap: wrap }
+.float-right { float: right }
+.font-large { font-size: 16pt }
+.grid { display: grid }
+.italic { font-style: italic }
+.justify-center { justify-content: center }
+.m-0 { margin: 0 }
+.mb-1 { margin-bottom: 1em }
+.ml-auto { margin-left: auto }
+.ml-05 { margin-left: .5em }
+.ml-1 { margin-left: 1em }
+.ml-2 { margin-left: 2em }
+.ml-3 { margin-left: 3em }
+.mr-05 { margin-right: .5em }
+.mr-1 { margin-right: 1em }
+.mr-2 { margin-right: 2em }
+.mt-05 { margin-top: .5em }
+.mt-1 { margin-top: 1em }
+.mt-15 { margin-top: 1.5em }
+.mt-2 { margin-top: 2em }
+.p-0-2-1 { padding: 0 2em 1em }
+.p-05 { padding: .5em }
+.p-1 { padding: 1em }
+.pt-1 { padding-top: 1em }
+.self-center { justify-self: center; text-align: center }
+.self-start { align-self: flex-start }
+.smaller { font-size: smaller }
+.space-evenly { justify-content: space-evenly }
+.text-center { text-align: center }
+.text-right { text-align: right }
+.text-selected { color: var(--color-primary) }
+.uppercase { text-transform: uppercase }
+.whitespace-pre { white-space: pre }

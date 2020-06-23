@@ -1,0 +1,14 @@
+mat-toolbar {
+  position: absolute;
+  z-index: 1;
+  color: white;
+  background: rgba(101, 70, 70, .5);
+}
+
+#pano {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

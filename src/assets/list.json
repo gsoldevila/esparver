@@ -1,0 +1,63 @@
+[
+  {
+    "id": "17860/can-sau",
+    "name": "Can Sau",
+    "timestamp": 1591439280028,
+    "latitude": 42.237505,
+    "longitude": 2.260831,
+    "faceSize": 4096,
+    "initialViewParameters": {
+      "pitch": 0.5,
+      "yaw": -1.2,
+      "fov": 1.7
+    }
+  },
+  {
+    "id": "17860/el-mas",
+    "name": "El Mas",
+    "timestamp": 1592044080028,
+    "latitude": 42.238392,
+    "longitude": 2.279589,
+    "initialViewParameters": {
+      "pitch": 0.4,
+      "yaw": 0.2,
+      "fov": 1
+    }
+  },
+  {
+    "id": "17860/paratge-del-mas",
+    "name": "Paratge del Mas",
+    "timestamp": 1592476080028,
+    "latitude": 42.238843,
+    "longitude": 2.282205,
+    "initialViewParameters": {
+      "pitch": 0.5,
+      "yaw": 0.8,
+      "fov": 1.2
+    }
+  },
+  {
+    "id": "17860/can-salvatella",
+    "name": "Can Salvatella",
+    "timestamp": 1592476108028,
+    "latitude": 42.237975,
+    "longitude": 2.282865,
+    "initialViewParameters": {
+      "pitch": 0.3,
+      "yaw": 1.15,
+      "fov": 1.5
+    }
+  },
+  {
+    "id": "17861/cal-casadet",
+    "name": "Cal Casadet",
+    "timestamp": 1592645280028,
+    "latitude": 42.280678,
+    "longitude": 2.292980,
+    "initialViewParameters": {
+      "pitch": 0.5,
+      "yaw": -3,
+      "fov": 1.7
+    }
+  }
+]

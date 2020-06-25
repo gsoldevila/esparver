@@ -11,13 +11,16 @@
     <mat-menu #opcions="matMenu">
       <div class="smaller color-medium-gray pl-05 italic">ORDENA</div>
       <mat-radio-group>
-        <mat-radio-button
-          *ngFor="let o of orders; index as i"
-          class="block p-1"
-          [checked]="order === i"
-          (click)="order = i"
-          [value]="i">
-            <span>{{ o }}</span>
+        <mat-radio-button class="block p-1" [checked]="order === 0" (click)="order = 0" [value]="0">
+          <span>Les més recents</span>
+        </mat-radio-button>
+
+        <mat-radio-button class="block p-1" [checked]="order === 1" (click)="order = 1" [value]="1" [disabled]="locationError && locationError.code === 1">
+          <span>Les més properes</span>
+        </mat-radio-button>
+
+        <mat-radio-button class="block p-1" [checked]="order === 2" (click)="order = 2" [value]="2">
+          <span>Alfabèticament</span>
         </mat-radio-button>
       </mat-radio-group>
 

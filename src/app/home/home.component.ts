@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
   locationError: GeolocationPositionError = { code: GeolocationPositionErrorCode.NOT_INITIALIZED };
 
   private _order = 0;
-  orders = [ 'Les més recents', 'Les més properes', 'Alfabèticament' ];
 
   model$: Observable<{ codes: PostalCode[], panoramas: Panorama[] }>;
 
@@ -43,7 +42,9 @@ export class HomeComponent implements OnInit {
   }
 
   set order(order: number) {
-    this._order = order;
+    if (order !== 1 || this.enableGeolocation()) {
+      this._order = order;
+    }
     this.filters$.next(null);
   }
 
@@ -56,34 +57,36 @@ export class HomeComponent implements OnInit {
       this.extractCodes,
       this.filterSortPanoramas,
       this.injectCodes,
-      tap((p) => console.log('yo', p)),
     );
 
     if (this.storageService.get('locationAuthorized')) this.enableGeolocation();
   }
 
   enableGeolocation() {
+    if (!this.locationError) return true;
     switch(this.locationError.code) {
       case GeolocationPositionErrorCode.NOT_INITIALIZED:
         return this.tryEnableGeolocation();
       case GeolocationPositionErrorCode.UNAVAILABLE:
-        return this.dialogService.message({
+        this.dialogService.message({
           title: 'Informació',
           paragraphs: [ 'Aquest dispositiu no suporta la geolocalització; aquesta funcionalitat no estarà disponible.' ],
         });
+        break;
       case GeolocationPositionErrorCode.PERMISSION_DENIED:
         this.storageService.clear('locationAuthorized');
-        return this.dialogService.message({
+        this.dialogService.message({
           title: 'Atenció',
           paragraphs: [ 'Has denegat el permís per veure la ubicació, aquesta funcionalitat no estarà disponible fins que el tornis a activar.' ],
         });
+        break;
       default:
-        return this.dialogService.message({
+        this.dialogService.message({
           title: 'Atenció',
           paragraphs: [ 'En aquests moments la informació de geolocalització no està disponible. Intenta-ho més tard.' ],
         });
     }
-
+    return false;
   }
 
   private tryEnableGeolocation() {
@@ -99,6 +102,7 @@ export class HomeComponent implements OnInit {
         this.enableGeolocation();
       }
     );
+    return true;
   }
 
   showPanorama(panorama: Panorama) {

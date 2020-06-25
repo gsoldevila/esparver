@@ -1,14 +1,21 @@
-mat-toolbar {
-  position: absolute;
-  z-index: 1;
-  color: white;
-  background: rgba(101, 70, 70, .5);
-}
+:host {
+  mat-toolbar {
+    position: absolute;
+    z-index: 1;
+    color: white;
+    background: rgba(101, 70, 70, .5);
+  }
 
-#pano {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  #pano {
+    background-color: #332424;
+    background-image: url(/assets/icons/loading-dark.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }

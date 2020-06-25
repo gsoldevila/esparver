@@ -1,4 +1,4 @@
-<ng-container *ngIf="(model$ | async) as model">
+<ng-container *ngIf="(model$ | async) as model; else loading">
   <mat-toolbar color="accent">
     A vista d'ocell
     <span class="spacer"></span>
@@ -46,3 +46,7 @@
     </button>
   </mat-action-list>
 </ng-container>
+
+<ng-template #loading>
+  <div class="loading"></div>
+</ng-template>

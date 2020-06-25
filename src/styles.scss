@@ -2,6 +2,8 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 :root {
+  --color-yellow: #ffd740;
+  --color-brown: #654747;
   --color-primary: #29c0ff;
   --color-accent: #38d68a;
   --color-dark: #333333;
@@ -65,6 +67,14 @@ mat-bottom-sheet-container {
   font-style: italic;
   color: var(--color-error);
 }
+
+.loading {
+  background-image: url(/assets/icons/loading.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 60vh;
+}
+
 
 .background-dark { background-color: var(--color-dark) }
 .background-primary { background-color: var(--color-primary) }

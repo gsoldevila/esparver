@@ -41,7 +41,11 @@
     <button mat-list-item *ngFor="let panorama of model.panoramas" (click)="showPanorama(panorama)">
       <div mat-line class="larger">{{ panorama.name }}</div>
       <div mat-line class="color-dark-gray">{{ POSTAL_CODES[panorama.postalCode] }} ({{ panorama.postalCode }})</div>
-      <div mat-line *ngIf="panorama.distance" class="small italic"><b>{{ panorama.distance | number:'1.0-2'}} kms</b> en línia recta</div>
+      <div mat-line *ngIf="panorama.distance" class="small italic">
+        <b *ngIf="panorama.distance < 1">{{ (panorama.distance * 1000) | number:'1.0-0'}} metres</b>
+        <b *ngIf="panorama.distance >= 1">{{ panorama.distance | number:'1.0-2'}} kms</b>
+         en línia recta
+      </div>
       <span class="material-icons">house</span>
     </button>
   </mat-action-list>

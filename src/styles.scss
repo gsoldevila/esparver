@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 :root {
@@ -7,6 +6,7 @@
   --color-accent: #38d68a;
   --color-dark: #333333;
   --color-gray: #dbdbdb;
+  --color-medium-gray: #999999;
   --color-dark-gray: #666666;
   --color-light: #f7f7f7;
   --color-warn: #ffd829;
@@ -69,11 +69,14 @@ mat-bottom-sheet-container {
 .background-dark { background-color: var(--color-dark) }
 .background-primary { background-color: var(--color-primary) }
 .background-white { background-color: white }
+.block { display: block }
 .break-word { word-break: break-word }
 .line-through { text-decoration: line-through }
 .color-primary { color: var(--color-primary) }
-.color-dark { color: var(--color-dark) }
+.color-gray { color: var(--color-gray) }
+.color-medium-gray { color: var(--color-medium-gray) }
 .color-dark-gray { color: var(--color-dark-gray) }
+.color-dark { color: var(--color-dark) }
 .color-white { color: white }
 .flex { display: flex }
 .flex-center { display: flex; align-items: center }
@@ -84,6 +87,8 @@ mat-bottom-sheet-container {
 .grid { display: grid }
 .italic { font-style: italic }
 .justify-center { justify-content: center }
+.large { font-size: large }
+.larger { font-size: larger }
 .m-0 { margin: 0 }
 .mb-1 { margin-bottom: 1em }
 .ml-auto { margin-left: auto }
@@ -98,14 +103,20 @@ mat-bottom-sheet-container {
 .mt-1 { margin-top: 1em }
 .mt-15 { margin-top: 1.5em }
 .mt-2 { margin-top: 2em }
+.no-border { border: 0 }
+.no-background { background: none }
 .p-0-2-1 { padding: 0 2em 1em }
 .p-05 { padding: .5em }
 .p-1 { padding: 1em }
+.pt-05 { padding-top: .5em }
 .pt-1 { padding-top: 1em }
+.pl-05 { padding-left: .5em }
 .self-center { justify-self: center; text-align: center }
 .self-start { align-self: flex-start }
+.small { font-size: small }
 .smaller { font-size: smaller }
 .space-evenly { justify-content: space-evenly }
+.spacer { flex: 1 1 auto }
 .text-center { text-align: center }
 .text-right { text-align: right }
 .text-selected { color: var(--color-primary) }

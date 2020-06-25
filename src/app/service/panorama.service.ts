@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, exhaustMap } from 'rxjs/operators';
 import { find } from 'lodash';
 
 import { environment } from '../../environments/environment';
 
 import { Panorama, LEVELS } from '../model/panorama';
+import { PositionService } from './position.service';
+import { GeolocationPosition, GeolocationCoordinates } from '../model/position';
 
 
 @Injectable({
@@ -15,11 +17,16 @@ import { Panorama, LEVELS } from '../model/panorama';
 export class PanoramaService {
   private panos: Panorama[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private position: PositionService) {}
 
-  getPanoramas(): Observable<Panorama[]> {
-    return this.panos ? of(this.panos) : this.fetchPanoramas();
+  getPanoramas(watchDistance: boolean = false): Observable<Panorama[]> {
+    const panos$ = this.panos ? of(this.panos) : this.fetchPanoramas();
+    return watchDistance ? panos$.pipe(this.watchDistance) : panos$;
   }
+
+  private watchDistance = exhaustMap((panos: Panorama[]) => this.position.getCurrentPosition().pipe(
+    map(position => this.calcDistances(panos, position))
+  ));
 
   getPanorama({ postalCode, slug }): Observable<Panorama> {
     return this.getPanoramas().pipe(
@@ -33,7 +40,6 @@ export class PanoramaService {
       tap(panos => this.panos = panos)
     );
   }
-
 
   private decoratePanoramas(panos: Panorama[]): Panorama[] {
     return panos.map(pano => this.decoratePanorama(pano));
@@ -57,6 +63,18 @@ export class PanoramaService {
 
     pano.initialViewParameters = pano.initialViewParameters || { pitch: 0, yaw: 0, fov: 1 };
 
+    return pano;
+  }
+
+  private calcDistances(panos: Panorama[], position: GeolocationPosition): Panorama[] {
+    if (position) {
+      panos.forEach(pano => this.calcDistance(pano, position.coords));
+    }
+    return panos;
+  }
+
+  private calcDistance(pano: Panorama, coords: GeolocationCoordinates): Panorama {
+    pano.distance = this.calcCrow(pano.latitude, pano.longitude, coords.latitude, coords.longitude);
     return pano;
   }
 

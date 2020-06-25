@@ -4,8 +4,8 @@
     "theme_color": "#654747",
     "background_color": "#654747",
     "display": "standalone",
-    "scope": "./",
-    "start_url": "./",
+    "scope": "/",
+    "start_url": "/",
     "icons": [
         {
             "src": "icons/android-chrome-192x192.png",

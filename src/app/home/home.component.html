@@ -1,22 +1,45 @@
-<mat-toolbar color="accent">
-  A vista d'ocell
-</mat-toolbar>
+<ng-container *ngIf="(model$ | async) as model">
+  <mat-toolbar color="accent">
+    A vista d'ocell
+    <span class="spacer"></span>
+    <button *ngIf="locationError" mat-icon-button class="no-border no-background" (click)="enableGeolocation()">
+      <span class="material-icons">location_off</span>
+    </button>
+    <button mat-icon-button class="no-border no-background" [matMenuTriggerFor]="opcions">
+      <span class="material-icons">filter_alt</span>
+    </button>
+    <mat-menu #opcions="matMenu">
+      <div class="smaller color-medium-gray pl-05 italic">ORDENA</div>
+      <mat-radio-group>
+        <mat-radio-button
+          *ngFor="let o of orders; index as i"
+          class="block p-1"
+          [checked]="order === i"
+          (click)="order = i"
+          [value]="i">
+            <span>{{ o }}</span>
+        </mat-radio-button>
+      </mat-radio-group>
 
-<div class="pt-1 flex justify-center">
-  <mat-form-field>
-    <mat-label>Ordena</mat-label>
-    <mat-select [(value)]="order">
-      <mat-option *ngFor="let order of orders; index as i" [value]="i">
-        {{ order }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+      <mat-divider></mat-divider>
 
-<mat-action-list>
-  <button mat-list-item *ngFor="let panorama of panoramas" (click)="showPanorama(panorama)">
-    <div mat-line>{{ panorama.name }}</div>
-    <div mat-line>{{ panorama.distance }}</div>
-    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M4 4h7V2H4c-1.1 0-2 .9-2 2v7h2V4zm6 9l-4 5h12l-3-4-2.03 2.71L10 13zm7-4.5c0-.83-.67-1.5-1.5-1.5S14 7.67 14 8.5s.67 1.5 1.5 1.5S17 9.33 17 8.5zM20 2h-7v2h7v7h2V4c0-1.1-.9-2-2-2zm0 18h-7v2h7c1.1 0 2-.9 2-2v-7h-2v7zM4 13H2v7c0 1.1.9 2 2 2h7v-2H4v-7z"/></svg>
-  </button>
-</mat-action-list>
+      <div class="smaller color-medium-gray pl-05 pt-05 italic">CODIS POSTALS</div>
+      <mat-checkbox
+        *ngFor="let code of model.codes; index as i"
+        class="block p-1"
+        [checked]="code.enabled"
+        (change)="toggleCode(i)">
+          {{ code.code }}
+      </mat-checkbox>
+    </mat-menu>
+  </mat-toolbar>
+
+  <mat-action-list>
+    <button mat-list-item *ngFor="let panorama of model.panoramas" (click)="showPanorama(panorama)">
+      <div mat-line class="larger">{{ panorama.name }}</div>
+      <div mat-line class="color-dark-gray">{{ POSTAL_CODES[panorama.postalCode] }} ({{ panorama.postalCode }})</div>
+      <div mat-line *ngIf="panorama.distance" class="small italic"><b>{{ panorama.distance | number:'1.0-2'}} kms</b> en línia recta</div>
+      <span class="material-icons">house</span>
+    </button>
+  </mat-action-list>
+</ng-container>

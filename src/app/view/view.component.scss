@@ -13,7 +13,7 @@
     width: 100%;
     height: 100%;
 
-    &:empty {
+    &.spinner, &.spinner > div {
       background-color: #332424;
       background-image: url(/assets/icons/loading-dark.gif);
       background-position: center;

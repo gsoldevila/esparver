@@ -1,5 +1,10 @@
 <mat-toolbar *ngIf="panorama">
-  {{ panorama.name }}
+  {{ panorama.name }} ({{ panorama.postalCode }})
 </mat-toolbar>
 
-<div #pano id="pano"></div>
+<div
+  #pano
+  id="pano"
+  [class.spinner]="loading || pristine"
+  (click)="pristine = false">
+</div>

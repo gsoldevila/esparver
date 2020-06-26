@@ -15,6 +15,8 @@ import { Panorama, LinkHotspot, InfoHotspot } from '../model/panorama';
   styleUrls: ['./view.component.scss']
 })
 export class ViewComponent implements AfterViewInit, OnDestroy {
+  loading = true;
+  pristine = true;
   panorama: Panorama;
   private _sub: Subscription;
   private scene: Marzipano.Scene;
@@ -48,6 +50,7 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
 
     this.scene.view.setParameters(this.panorama.initialViewParameters);
     this.scene.scene.switchTo();
+    this.loading = false;
     this.startAutorotate();
   }
 

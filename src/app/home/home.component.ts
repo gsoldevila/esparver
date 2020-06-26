@@ -7,7 +7,7 @@ import { map, tap } from 'rxjs/operators';
 import { PanoramaService } from '../service/panorama.service';
 import { PositionService } from '../service/position.service';
 import { DialogService } from '../service/dialog.service';
-import { Panorama } from '../model/panorama';
+import { Panorama, PANORAMA_ICONS } from '../model/panorama';
 import { POSTAL_CODES, PostalCode } from '../model/postal';
 import { GeolocationPositionError, GeolocationPositionErrorCode } from '../model/position';
 import { StorageService } from '../service/storage.service';
@@ -21,6 +21,7 @@ import { StorageService } from '../service/storage.service';
 export class HomeComponent implements OnInit {
   private _codes: PostalCode[];
   POSTAL_CODES = POSTAL_CODES;
+  PANORAMA_ICONS = PANORAMA_ICONS;
   locationError: GeolocationPositionError = { code: GeolocationPositionErrorCode.NOT_INITIALIZED };
 
   private _order = 0;
@@ -116,9 +117,12 @@ export class HomeComponent implements OnInit {
   });
 
   private filterSortPanoramas = map((panos: Panorama[]) => {
+    // show only indexable panos
+    panos = (panos || []).filter(pano => pano.index !== false);
+
     // keep only enabled postal codes
     const enabledCodes = filter(this._codes, 'enabled').map(c => c.code);
-    panos = (panos || []).filter(pano => includes(enabledCodes, pano.postalCode));
+    panos = panos.filter(pano => includes(enabledCodes, pano.postalCode));
 
     // sort panos depending on selected criteria
     switch(this.order) {

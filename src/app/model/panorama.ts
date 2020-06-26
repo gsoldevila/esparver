@@ -3,6 +3,7 @@ export interface Panorama {
   postalCode?: string;
   slug?: string;
   name: string;
+  index?: boolean;
   timestamp: number;
   latitude: number;
   longitude: number;
@@ -12,6 +13,18 @@ export interface Panorama {
   linkHotspots?: LinkHotspot[];
   infoHotspots?: InfoHotspot[];
   levels?: Level[];
+}
+
+export enum PanoramaType {
+  HOUSE = 'HOUSE',
+  RESTAURANT = 'RESTAURANT',
+  SCENERY = 'SCENERY',
+}
+
+export const PANORAMA_ICONS = {
+  'HOUSE': 'house',
+  'RESTAURANT': 'restaurant',
+  'SCENERY': 'wallpaper',
 }
 
 export interface Level {

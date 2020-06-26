@@ -1,7 +1,8 @@
 [
   {
     "id": "17860/can-sau",
-    "name": "Can Sau",
+    "name": "Sau, Can",
+    "type": "HOUSE",
     "timestamp": 1591439280028,
     "latitude": 42.237505,
     "longitude": 2.260831,
@@ -14,7 +15,8 @@
   },
   {
     "id": "17860/el-mas",
-    "name": "El Mas",
+    "name": "Mas, El",
+    "type": "HOUSE",
     "timestamp": 1592044080028,
     "latitude": 42.238392,
     "longitude": 2.279589,
@@ -26,7 +28,8 @@
   },
   {
     "id": "17860/paratge-del-mas",
-    "name": "Paratge del Mas",
+    "name": "Mas, Paratge del",
+    "type": "HOUSE",
     "timestamp": 1592476080028,
     "latitude": 42.238843,
     "longitude": 2.282205,
@@ -38,7 +41,8 @@
   },
   {
     "id": "17860/can-salvatella",
-    "name": "Can Salvatella",
+    "name": "Salvatella, Can",
+    "type": "HOUSE",
     "timestamp": 1592476108028,
     "latitude": 42.237975,
     "longitude": 2.282865,
@@ -50,7 +54,8 @@
   },
   {
     "id": "17861/cal-casadet",
-    "name": "Cal Casadet",
+    "name": "Casadet, Cal",
+    "type": "HOUSE",
     "timestamp": 1592645280028,
     "latitude": 42.280678,
     "longitude": 2.292980,
@@ -58,6 +63,47 @@
       "pitch": 0.5,
       "yaw": -3,
       "fov": 1.7
+    }
+  },
+  {
+    "id": "17860/la-ruta-del-ferro",
+    "name": "Ruta del Ferro, La",
+    "type": "RESTAURANT",
+    "timestamp": 1593145680028,
+    "latitude": 42.237876,
+    "longitude": 2.284730,
+    "initialViewParameters": {
+      "pitch": 0.5,
+      "yaw": 0.6,
+      "fov": 1.2
+    }
+  },
+  {
+    "id": "17860/la-ruta-amunt",
+    "name": "La Ruta des de dalt",
+    "type": "SCENERY",
+    "index": false,
+    "timestamp": 1593145708028,
+    "latitude": 42.237780,
+    "longitude": 2.284084,
+    "initialViewParameters": {
+      "pitch": 0.4,
+      "yaw": -1,
+      "fov": 2
+    }
+  },
+  {
+    "id": "17860/el-janpere",
+    "name": "Janpere, El",
+    "type": "HOUSE",
+    "index": false,
+    "timestamp": 1593170880028,
+    "latitude": 42.243635,
+    "longitude": 2.299633,
+    "initialViewParameters": {
+      "pitch": 0.6,
+      "yaw": 2.65,
+      "fov": 1.4
     }
   }
 ]

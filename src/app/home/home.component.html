@@ -46,7 +46,7 @@
         <b *ngIf="panorama.distance >= 1">{{ panorama.distance | number:'1.0-2'}} kms</b>
          en línia recta
       </div>
-      <span class="material-icons">house</span>
+      <span class="material-icons">{{ PANORAMA_ICONS[panorama.type] }}</span>
     </button>
   </mat-action-list>
 </ng-container>

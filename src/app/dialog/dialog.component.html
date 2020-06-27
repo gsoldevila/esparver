@@ -1,6 +1,6 @@
-<h3 mat-dialog-title>{{ data.title }}</h3>
+<h3 mat-dialog-title class="text-center">{{ data.title }}</h3>
 <div mat-dialog-content>
-  <p *ngFor="let p of data.paragraphs" class="light">{{ p }}</p>
+  <p *ngFor="let p of data.paragraphs" class="light" [innerHTML]="p | html"></p>
 </div>
 <div mat-dialog-actions align="center">
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Entesos</button>

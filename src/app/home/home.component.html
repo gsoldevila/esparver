@@ -12,7 +12,7 @@
       <div class="smaller color-medium-gray pl-05 italic">ORDENA</div>
       <mat-radio-group>
         <mat-radio-button class="block p-1" [checked]="order === 0" (click)="order = 0" [value]="0">
-          <span>Les més recents</span>
+          <span>Alfabèticament</span>
         </mat-radio-button>
 
         <mat-radio-button class="block p-1" [checked]="order === 1" (click)="order = 1" [value]="1" [disabled]="locationError && locationError.code === 1">
@@ -20,7 +20,7 @@
         </mat-radio-button>
 
         <mat-radio-button class="block p-1" [checked]="order === 2" (click)="order = 2" [value]="2">
-          <span>Alfabèticament</span>
+          <span>Les més recents</span>
         </mat-radio-button>
       </mat-radio-group>
 
@@ -31,7 +31,7 @@
         *ngFor="let code of model.codes; index as i"
         class="block p-1"
         [checked]="code.enabled"
-        (change)="toggleCode(i)">
+        (click)="toggleCode(i)">
           {{ code.code }}
       </mat-checkbox>
     </mat-menu>
@@ -39,14 +39,14 @@
 
   <mat-action-list>
     <button mat-list-item *ngFor="let panorama of model.panoramas" (click)="showPanorama(panorama)">
-      <div mat-line class="larger">{{ order === 2 ? panorama.name : panorama.label }}</div>
+      <div mat-line class="larger">{{ order ? panorama.label : panorama.name }}</div>
       <div mat-line class="color-dark-gray">{{ POSTAL_CODES[panorama.postalCode] }} ({{ panorama.postalCode }})</div>
       <div mat-line *ngIf="panorama.distance" class="small italic">
         <b *ngIf="panorama.distance < 1">{{ (panorama.distance * 1000) | number:'1.0-0'}} metres</b>
         <b *ngIf="panorama.distance >= 1">{{ panorama.distance | number:'1.0-2'}} kms</b>
          en línia recta
       </div>
-      <span class="material-icons">{{ PANORAMA_ICONS[panorama.type] }}</span>
+      <span class="material-icons">{{ PANORAMA_ICONS[panorama.type] || 'photo_camera' }}</span>
     </button>
   </mat-action-list>
 </ng-container>

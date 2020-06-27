@@ -20,6 +20,7 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   private _sub: Subscription;
   private scene: Marzipano.Scene;
   private viewer: Marzipano.Viewer;
+  private autorotate;
   @ViewChild('pano') view: ElementRef;
 
   constructor(
@@ -35,10 +36,15 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   private initMarzipano() {
     // Initialize viewer.
     this.viewer = new Marzipano.Viewer(this.view.nativeElement, { controls: { mouseViewMode: 'drag' } });
+    this.autorotate = Marzipano.autorotate({
+      yawSpeed: 0.1,         // Yaw rotation speed
+      targetPitch: 0,        // Pitch value to converge to
+      targetFov: Math.PI/2   // Fov value to converge to
+    });
   }
 
   async switchScene(params) {
-    this.stopAutorotate();
+    this.viewer.stopMovement();
 
     try {
       this.panorama = await this.panoramaService.getPanorama(params).toPromise();
@@ -49,8 +55,11 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
 
     this.scene.view.setParameters(this.panorama.initialViewParameters);
     this.scene.scene.switchTo();
-    setTimeout(() => this.loading = false, 2000);
-    this.startAutorotate();
+    setTimeout(() => {
+      this.loading = false;
+      this.viewer.startMovement(this.autorotate);
+      this.viewer.setIdleMovement(3000, this.autorotate);
+    }, 3000);
   }
 
   private createScene(panorama: Panorama) {
@@ -86,14 +95,6 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
       scene: scene,
       view: view
     };
-  }
-
-  startAutorotate() {
-
-  }
-
-  stopAutorotate() {
-
   }
 
   createLinkHotspotElement(hotspot: LinkHotspot) {

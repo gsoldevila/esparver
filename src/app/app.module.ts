@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ViewComponent } from './view/view.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { HtmlPipe } from './service/html.pipe';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { DialogComponent } from './dialog/dialog.component';
     HomeComponent,
     ViewComponent,
     DialogComponent,
+    HtmlPipe,
   ],
   imports: [
     BrowserModule,

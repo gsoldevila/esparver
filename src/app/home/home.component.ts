@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter, sortBy, sortedUniq, includes } from 'lodash';
+import { filter, sortBy, uniq, includes } from 'lodash';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
@@ -71,20 +71,27 @@ export class HomeComponent implements OnInit {
       case GeolocationPositionErrorCode.UNAVAILABLE:
         this.dialogService.message({
           title: 'Informació',
-          paragraphs: [ 'Aquest dispositiu no suporta la geolocalització; aquesta funcionalitat no estarà disponible.' ],
+          paragraphs: [
+            'Aquest dispositiu no suporta la geolocalització; aquesta funcionalitat no estarà disponible.'
+          ],
         });
         break;
       case GeolocationPositionErrorCode.PERMISSION_DENIED:
         this.storageService.clear('locationAuthorized');
         this.dialogService.message({
           title: 'Atenció',
-          paragraphs: [ 'Has denegat el permís per veure la ubicació, aquesta funcionalitat no estarà disponible fins que el tornis a activar.' ],
+          paragraphs: [
+            'Has denegat el permís per veure la ubicació, aquesta funcionalitat no estarà disponible fins que el tornis a activar.',
+            'Si tens un iPhone o iPad, segueix <a href="https://support.apple.com/ca-es/HT207092" target="_blank">aquestes instruccions</a> per activar la geolocalització.'
+          ],
         });
         break;
       default:
         this.dialogService.message({
           title: 'Atenció',
-          paragraphs: [ 'En aquests moments la informació de geolocalització no està disponible. Intenta-ho més tard.' ],
+          paragraphs: [
+            'En aquests moments la informació de geolocalització no està disponible. Intenta-ho més tard.'
+          ],
         });
     }
     return false;
@@ -112,7 +119,9 @@ export class HomeComponent implements OnInit {
 
   private extractCodes = tap((panos: Panorama[]) => {
     if (!this._codes) {
-      this._codes = sortedUniq(panos.map(p => p.postalCode)).map(code => ({ code, enabled: true }));
+      this._codes = uniq(panos.map(p => p.postalCode))
+        .sort()
+        .map(code => ({ code, enabled: true }));
     }
   });
 
@@ -126,9 +135,9 @@ export class HomeComponent implements OnInit {
 
     // sort panos depending on selected criteria
     switch(this.order) {
-      case 0: return sortBy(panos, 'timestamp').reverse();
+      case 0: return sortBy(panos, 'name');
       case 1: return sortBy(panos, 'distance');
-      case 2: return sortBy(panos, 'name');
+      case 2: return sortBy(panos, 'timestamp').reverse();
     }
   });
 

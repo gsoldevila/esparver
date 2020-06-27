@@ -105,5 +105,18 @@
       "yaw": 2.65,
       "fov": 1.4
     }
+  },
+  {
+    "id": "17860/el-vila",
+    "name": "Vilà, El",
+    "type": "HOUSE",
+    "timestamp": 1593268080028,
+    "latitude": 42.227669,
+    "longitude": 2.255765,
+    "initialViewParameters": {
+      "pitch": 0.8,
+      "yaw": -1,
+      "fov": 1.4
+    }
   }
 ]

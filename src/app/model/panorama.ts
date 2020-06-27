@@ -3,6 +3,7 @@ export interface Panorama {
   postalCode?: string;
   slug?: string;
   name: string;
+  label?: string;
   index?: boolean;
   timestamp: number;
   latitude: number;

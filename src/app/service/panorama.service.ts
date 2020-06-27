@@ -51,11 +51,20 @@ export class PanoramaService {
     pano.postalCode = id[0];
     pano.slug = id[1];
 
+    // set the label (reshuffling the name)
+    if (!pano.label) {
+      pano.label = pano.name;
+      const lastComma = pano.name.lastIndexOf(',');
+      if (lastComma > 0) {
+        const prefix = pano.name.substring(lastComma + 1);
+        const suffix = pano.name.substring(0, lastComma);
+        pano.label = `${prefix} ${suffix}`.trim();
+      }
+    }
+
     // set the default faceSize and levels
     pano.faceSize = pano.faceSize || 8192;
     pano.levels = LEVELS[pano.faceSize];
-
-    // TODO calculate the distance to the current point
 
     // set default empty lists for hotspots
     pano.linkHotspots = pano.linkHotspots || [];

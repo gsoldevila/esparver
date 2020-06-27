@@ -39,7 +39,7 @@
 
   <mat-action-list>
     <button mat-list-item *ngFor="let panorama of model.panoramas" (click)="showPanorama(panorama)">
-      <div mat-line class="larger">{{ panorama.name }}</div>
+      <div mat-line class="larger">{{ order === 2 ? panorama.name : panorama.label }}</div>
       <div mat-line class="color-dark-gray">{{ POSTAL_CODES[panorama.postalCode] }} ({{ panorama.postalCode }})</div>
       <div mat-line *ngIf="panorama.distance" class="small italic">
         <b *ngIf="panorama.distance < 1">{{ (panorama.distance * 1000) | number:'1.0-0'}} metres</b>

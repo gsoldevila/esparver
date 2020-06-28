@@ -53,6 +53,21 @@ mat-bottom-sheet-container {
   }
 }
 
+/* Have radio buttons and checkboxes occupy the whole space, to improve UX */
+mat-radio-button {
+  width: calc(100% - 2em);
+}
+
+.mat-checkbox {
+  label.mat-checkbox-layout {
+    display: flex;
+
+    .mat-checkbox-inner-container {
+      margin-left: 0;
+    }
+  }
+}
+
 /* Lighter placeholder text color */
 ::placeholder { color: var(--color-gray) }
 

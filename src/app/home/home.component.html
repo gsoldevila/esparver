@@ -31,7 +31,7 @@
         *ngFor="let code of model.codes; index as i"
         class="block p-1"
         [checked]="code.enabled"
-        (click)="toggleCode(i)">
+        (change)="toggleCode(i)">
           {{ code.code }}
       </mat-checkbox>
     </mat-menu>

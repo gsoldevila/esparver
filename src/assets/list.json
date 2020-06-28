@@ -118,5 +118,31 @@
       "yaw": -1,
       "fov": 1.4
     }
+  },
+  {
+    "id": "17860/les-torrenteres",
+    "name": "Torrenteres, Les",
+    "type": "HOUSE",
+    "timestamp": 1593336480028,
+    "latitude": 42.239447,
+    "longitude": 2.262550,
+    "initialViewParameters": {
+      "pitch": 0.5,
+      "yaw": 0.5,
+      "fov": 1
+    }
+  },
+  {
+    "id": "17860/la-serra-del-cadell",
+    "name": "Serra del Cadell, La",
+    "type": "HOUSE",
+    "timestamp": 1593336508028,
+    "latitude": 42.235382,
+    "longitude": 2.270959,
+    "initialViewParameters": {
+      "pitch": 0.6,
+      "yaw": 1.1,
+      "fov": 2
+    }
   }
 ]

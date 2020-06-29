@@ -21,7 +21,6 @@
               "hammerjs",
               "lodash",
               "marzipano",
-              "qrcode",
               "zone.js/dist/zone-error"
             ],
             "outputPath": "www",

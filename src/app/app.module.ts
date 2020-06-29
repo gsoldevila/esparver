@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { QRCodeModule } from 'angularx-qrcode';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
@@ -36,7 +35,6 @@ import { HtmlPipe } from './service/html.pipe';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    QRCodeModule,
     MatButtonModule,
     MatToolbarModule,
     MatListModule,

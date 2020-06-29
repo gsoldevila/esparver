@@ -107,6 +107,7 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.viewer.destroy();
     this._sub && this._sub.unsubscribe();
   }
 }

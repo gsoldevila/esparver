@@ -44,6 +44,7 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   }
 
   async switchScene(params) {
+    console.debug('[ViewComponent] Switching to scene', params);
     this.viewer.stopMovement();
 
     try {
@@ -64,7 +65,7 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
 
   private createScene(panorama: Panorama) {
     var source = Marzipano.ImageUrlSource.fromString(
-      `${environment.mediaUrl}/${panorama.id}/{z}/{f}/{y}/{x}.jpg`,
+      `${environment.mediaUrl}/${panorama.media || panorama.id}/{z}/{f}/{y}/{x}.jpg`,
       { cubeMapPreviewUrl: `${environment.mediaUrl}/${panorama.id}/preview.jpg` });
     var geometry = new Marzipano.CubeGeometry(panorama.levels);
 

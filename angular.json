@@ -17,6 +17,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "hammerjs",
+              "lodash",
+              "marzipano",
+              "qrcode",
+              "zone.js/dist/zone-error"
+            ],
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",

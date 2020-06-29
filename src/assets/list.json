@@ -66,6 +66,20 @@
     }
   },
   {
+    "id": "17861/cal-cabrer",
+    "media": "17861/cal-casadet",
+    "name": "Cabrer, Cal",
+    "type": "HOUSE",
+    "timestamp": 1592645280028,
+    "latitude": 42.280107,
+    "longitude": 2.293204,
+    "initialViewParameters": {
+      "pitch": 0.6,
+      "yaw": 0,
+      "fov": 0.8
+    }
+  },
+  {
     "id": "17860/la-ruta-del-ferro",
     "name": "Ruta del Ferro, La",
     "type": "RESTAURANT",

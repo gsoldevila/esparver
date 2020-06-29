@@ -1,5 +1,6 @@
 export interface Panorama {
   id: string;
+  media?: string;
   postalCode?: string;
   slug?: string;
   name: string;

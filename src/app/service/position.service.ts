@@ -41,7 +41,7 @@ export class PositionService {
   private watchPosition() {
     navigator.geolocation.watchPosition(
       (position: GeolocationPosition) => {
-        console.log('[PositionService] Position changed:', position);
+        console.debug('[PositionService] Position changed:', position);
         this.position.next(position);
       },
       (error: GeolocationPositionError) => {

@@ -1,8 +1,8 @@
 {
     "name": "Esparver",
     "short_name": "Esparver",
-    "theme_color": "#ffd740",
-    "background_color": "#654747",
+    "theme_color": "#332424",
+    "background_color": "#332424",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",

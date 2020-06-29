@@ -9,6 +9,8 @@ import { PanoramaService } from '../service/panorama.service';
 import { Panorama, LinkHotspot, InfoHotspot } from '../model/panorama';
 
 
+const ZOOM_LEVELS = [1, 2, 1, 0];
+
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
@@ -21,6 +23,8 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   private scene: Marzipano.Scene;
   private viewer: Marzipano.Viewer;
   private autorotate;
+  private _zoom: number = null;
+  private _firstClick: boolean;
   @ViewChild('pano') view: ElementRef;
 
   constructor(
@@ -63,39 +67,45 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
     }, 3000);
   }
 
-  private createScene(panorama: Panorama) {
-    var source = Marzipano.ImageUrlSource.fromString(
-      `${environment.mediaUrl}/${panorama.media || panorama.id}/{z}/{f}/{y}/{x}.jpg`,
-      { cubeMapPreviewUrl: `${environment.mediaUrl}/${panorama.id}/preview.jpg` });
-    var geometry = new Marzipano.CubeGeometry(panorama.levels);
+  private createScene(data: Panorama) {
+    const source = Marzipano.ImageUrlSource.fromString(
+      `${environment.mediaUrl}/${data.media || data.id}/{z}/{f}/{y}/{x}.jpg`,
+      { cubeMapPreviewUrl: `${environment.mediaUrl}/${data.id}/preview.jpg` });
+    const geometry = new Marzipano.CubeGeometry(data.levels);
 
-    var limiter = Marzipano.RectilinearView.limit.traditional(panorama.faceSize, 100*Math.PI/180, 120*Math.PI/180);
-    var view = new Marzipano.RectilinearView(panorama.initialViewParameters, limiter);
+    const limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize, 100*Math.PI/180, 120*Math.PI/180);
+    const view = new Marzipano.RectilinearView(data.initialViewParameters, limiter);
 
-    var scene = this.viewer.createScene({
-      source: source,
-      geometry: geometry,
-      view: view,
-      pinFirstLevel: true
-    });
+    const scene = this.viewer.createScene({ source, geometry, view, pinFirstLevel: true });
 
     // Create link hotspots.
-    panorama.linkHotspots.forEach((hotspot) => {
-      var element = this.createLinkHotspotElement(hotspot);
+    data.linkHotspots.forEach((hotspot) => {
+      const element = this.createLinkHotspotElement(hotspot);
       scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
     });
 
     // Create info hotspots.
-    panorama.infoHotspots.forEach((hotspot) => {
-      var element = this.createInfoHotspotElement(hotspot);
+    data.infoHotspots.forEach((hotspot) => {
+      const element = this.createInfoHotspotElement(hotspot);
       scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
     });
 
-    return {
-      data: panorama,
-      scene: scene,
-      view: view
-    };
+    return { data, scene, view };
+  }
+
+  toggleZoom() {
+    if (!this._firstClick) {
+      this._firstClick = true;
+      setTimeout(() => this._firstClick = false, 250);
+    } else {
+      if (this._zoom === null) {
+        this._zoom = ZOOM_LEVELS.findIndex(fov => fov + 0.2 < this.viewer.scene().view().parameters().fov);
+        if (this._zoom === -1) this._zoom = 1;
+      } else {
+        this._zoom = (this._zoom + 1) % ZOOM_LEVELS.length;
+      }
+      this.viewer.lookTo({ fov: ZOOM_LEVELS[this._zoom] });
+    }
   }
 
   createLinkHotspotElement(hotspot: LinkHotspot) {

@@ -4,10 +4,10 @@ import * as Marzipano from 'marzipano';
 
 import { environment } from '../../environments/environment';
 
-import { ComponentWithSubscriptions } from '../service/base';
 import { PanoramaService } from '../service/panorama.service';
 import { Panorama, HotspotType, HOTSPOT_ICONS } from '../model/panorama';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 
 const ZOOM_LEVELS = [2, 1, 0, 1];
@@ -17,7 +17,9 @@ const ZOOM_LEVELS = [2, 1, 0, 1];
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.scss']
 })
-export class ViewComponent extends ComponentWithSubscriptions implements AfterViewInit, OnDestroy {
+export class ViewComponent implements AfterViewInit, OnDestroy {
+  private _subscriptions: Subscription[] = [];
+
   loading = true;
   private _params: { postalCode: string, slug: string };
   panorama: Panorama;
@@ -34,13 +36,11 @@ export class ViewComponent extends ComponentWithSubscriptions implements AfterVi
     private router: Router,
     private route: ActivatedRoute,
     private panoramaService: PanoramaService
-  ) {
-    super();
-  }
+  ) {}
 
   ngAfterViewInit(): void {
     this.initMarzipano();
-    this.registerSubscription(this.route.params
+    this._registerSubscription(this.route.params
       .pipe(
         distinctUntilChanged(),
         tap((params: any) => this.switchScene(params)),
@@ -148,8 +148,12 @@ export class ViewComponent extends ComponentWithSubscriptions implements AfterVi
     });
   }
 
+  private _registerSubscription(s: Subscription): void {
+    this._subscriptions.push(s);
+  }
+
   ngOnDestroy(): void {
-    super.ngOnDestroy();
+    this._subscriptions.forEach(s => s.unsubscribe());
     this.viewer.destroy();
   }
 }

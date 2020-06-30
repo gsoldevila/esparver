@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   dbUrl: '/assets/list.json',
-  mediaUrl: 'https://s3.amazonaws.com/esparver.cat/media',
+  //mediaUrl: 'https://s3.amazonaws.com/esparver.cat/media',
+  mediaUrl: 'https://esparver.cat/media',
 };
 
 /*

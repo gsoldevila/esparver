@@ -28,10 +28,9 @@ export class PanoramaService {
     map(position => this.calcDistances(panos, position))
   ));
 
-  getPanorama({ postalCode, slug }): Observable<Panorama> {
-    return this.getPanoramas().pipe(
-      map(refs => find(refs, { id: `${postalCode}/${slug}` }))
-    );
+  getPanorama(id: { postalCode: string, slug: string } | string): Observable<Panorama> {
+    if (typeof id === 'object') id = `${id.postalCode}/${id.slug}`;
+    return this.getPanoramas().pipe(map(refs => find(refs, { id })));
   }
 
   fetchPanoramas(): Observable<Panorama[]> {
@@ -65,10 +64,6 @@ export class PanoramaService {
     // set the default faceSize and levels
     pano.faceSize = pano.faceSize || 8192;
     pano.levels = LEVELS[pano.faceSize];
-
-    // set default empty lists for hotspots
-    pano.linkHotspots = pano.linkHotspots || [];
-    pano.infoHotspots = pano.infoHotspots || [];
 
     pano.initialViewParameters = pano.initialViewParameters || { pitch: 0, yaw: 0, fov: 1 };
 

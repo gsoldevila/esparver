@@ -12,8 +12,7 @@ export interface Panorama {
   distance?: number;
   faceSize?: number;
   initialViewParameters: PitchYawFov;
-  linkHotspots?: LinkHotspot[];
-  infoHotspots?: InfoHotspot[];
+  hotspots?: Hotspot[];
   levels?: Level[];
 }
 
@@ -41,20 +40,21 @@ export interface PitchYawFov {
   fov: number;
 }
 
-export interface LinkHotspot {
-  yaw: number;
-  pitch: number;
-  rotation: number;
-  target: string;
+export interface Hotspot {
+  type: HotspotType;
+  position: HotspotPosition;
+  data: any;
 }
 
-export interface InfoHotspot {
-  yaw: number;
-  pitch: number;
-  title: string;
-  text: string;
+export enum HotspotType {
+  PANORAMA = 'PANORAMA',
 }
 
+export interface HotspotPosition {
+  yaw: number;
+  pitch: number;
+  rotation?: number;
+}
 
 export const LEVELS = [];
 LEVELS[4096] = [

@@ -24,7 +24,19 @@
       "pitch": 0.4,
       "yaw": 0.2,
       "fov": 1
-    }
+    },
+    "hotspots": [
+      {
+        "type": "PANORAMA",
+        "data": "17860/paratge-del-mas",
+        "position": { "yaw": 2.6733957610359163, "pitch": 0.10094591765045635 }
+      },
+      {
+        "type": "PANORAMA",
+        "data": "17860/can-salvatella",
+        "position": { "yaw": -3.128858603890613, "pitch": 0.11645849970996913 }
+      }
+    ]
   },
   {
     "id": "17860/paratge-del-mas",
@@ -37,7 +49,19 @@
       "pitch": 0.5,
       "yaw": 0.8,
       "fov": 1.2
-    }
+    },
+    "hotspots": [
+      {
+        "type": "PANORAMA",
+        "data": "17860/el-mas",
+        "position": { "yaw": -1.309537561272636, "pitch": 0.03583104114591862 }
+      },
+      {
+        "type": "PANORAMA",
+        "data": "17860/can-salvatella",
+        "position": { "yaw": 2.7504564597685253, "pitch": 0.19214550990750823 }
+      }
+    ]
   },
   {
     "id": "17860/can-salvatella",
@@ -50,7 +74,24 @@
       "pitch": 0.3,
       "yaw": 1.15,
       "fov": 1.5
-    }
+    },
+    "hotspots": [
+      {
+        "type": "PANORAMA",
+        "data": "17860/paratge-del-mas",
+        "position": { "yaw": -0.45216527751399127, "pitch": 0.00865602455723824 }
+      },
+      {
+        "type": "PANORAMA",
+        "data": "17860/el-mas",
+        "position": { "yaw": -1.5280601516601067, "pitch": -0.004884481188609513 }
+      },
+      {
+        "type": "PANORAMA",
+        "data": "17860/la-ruta-del-ferro",
+        "position": { "yaw": 1.4117388990734447, "pitch": 0.09552248690288856 }
+      }
+    ]
   },
   {
     "id": "17861/cal-casadet",
@@ -74,9 +115,9 @@
     "latitude": 42.280107,
     "longitude": 2.293204,
     "initialViewParameters": {
-      "pitch": 0.6,
-      "yaw": 0,
-      "fov": 0.8
+      "yaw": -0.015012385173267973,
+      "pitch": 0.4867474650634165,
+      "fov": 0.6
     }
   },
   {
@@ -90,11 +131,23 @@
       "pitch": 0.5,
       "yaw": 0.6,
       "fov": 1.2
-    }
+    },
+    "hotspots": [
+      {
+        "type": "PANORAMA",
+        "data": "17860/can-salvatella",
+        "position": { "yaw": -3.0640313062592632, "pitch": -0.01790830077973027 }
+      },
+      {
+        "type": "PANORAMA",
+        "data": "17860/la-ruta-amunt",
+        "position": { "yaw": 2.5186402381059985, "pitch": -1.0050102359881965 }
+      }
+    ]
   },
   {
     "id": "17860/la-ruta-amunt",
-    "name": "La Ruta des de dalt",
+    "name": "La Ruta ↑",
     "type": "SCENERY",
     "index": false,
     "timestamp": 1593145708028,
@@ -104,7 +157,29 @@
       "pitch": 0.4,
       "yaw": -1,
       "fov": 2
-    }
+    },
+    "hotspots": [
+      {
+        "type": "PANORAMA",
+        "data": "17860/la-ruta-del-ferro",
+        "position": { "yaw": -0.8010255210627442, "pitch": 0.7754861589940205 }
+      },
+      {
+        "type": "PANORAMA",
+        "data": "17860/can-salvatella",
+        "position": { "yaw": -3.1353826372001734, "pitch": 0.4511824569133722 }
+      },
+      {
+        "type": "PANORAMA",
+        "data": "17860/paratge-del-mas",
+        "position": { "yaw": -2.817236552267218, "pitch": 0.19426806166216437 }
+      },
+      {
+        "type": "PANORAMA",
+        "data": "17860/el-mas",
+        "position": { "yaw": 2.96265371820109, "pitch": 0.09760384483027629 }
+      }
+    ]
   },
   {
     "id": "17860/el-janpere",
@@ -153,7 +228,7 @@
     "latitude": 42.235382,
     "longitude": 2.270959,
     "initialViewParameters": {
-      "pitch": 0.6,
+      "pitch": 0.4,
       "yaw": 1.1,
       "fov": 2
     }

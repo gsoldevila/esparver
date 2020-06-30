@@ -1,15 +1,16 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as Marzipano from 'marzipano';
 import { Subscription } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
 import { PanoramaService } from '../service/panorama.service';
-import { Panorama, LinkHotspot, InfoHotspot } from '../model/panorama';
+import { Panorama, HotspotType } from '../model/panorama';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 
 
-const ZOOM_LEVELS = [1, 2, 1, 0];
+const ZOOM_LEVELS = [2, 1, 0, 1];
 
 @Component({
   selector: 'app-view',
@@ -18,6 +19,7 @@ const ZOOM_LEVELS = [1, 2, 1, 0];
 })
 export class ViewComponent implements AfterViewInit, OnDestroy {
   loading = true;
+  private _params: { postalCode: string, slug: string };
   panorama: Panorama;
   private _sub: Subscription;
   private scene: Marzipano.Scene;
@@ -26,15 +28,21 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   private _zoom: number = null;
   private _firstClick: boolean;
   @ViewChild('pano') view: ElementRef;
+  crosshair: boolean = !environment.production;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private panoramaService: PanoramaService
   ) {}
 
   ngAfterViewInit(): void {
     this.initMarzipano();
-    this._sub = this.route.params.subscribe((params: any) => this.switchScene(params));
+    this._sub = this.route.params
+      .pipe(
+        distinctUntilChanged(),
+        tap((params: any) => this.switchScene(params)),
+      ).subscribe();
   }
 
   private initMarzipano() {
@@ -48,6 +56,8 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   }
 
   async switchScene(params) {
+    this._params = params;
+
     console.debug('[ViewComponent] Switching to scene', params);
     this.viewer.stopMovement();
 
@@ -62,44 +72,32 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
     this.scene.scene.switchTo();
     setTimeout(() => {
       this.loading = false;
-      this.viewer.startMovement(this.autorotate);
-      this.viewer.setIdleMovement(3000, this.autorotate);
+      if (environment.production) {
+        this.viewer.startMovement(this.autorotate);
+        this.viewer.setIdleMovement(3000, this.autorotate);
+      }
     }, 3000);
-  }
-
-  private createScene(data: Panorama) {
-    const source = Marzipano.ImageUrlSource.fromString(
-      `${environment.mediaUrl}/${data.media || data.id}/{z}/{f}/{y}/{x}.jpg`,
-      { cubeMapPreviewUrl: `${environment.mediaUrl}/${data.id}/preview.jpg` });
-    const geometry = new Marzipano.CubeGeometry(data.levels);
-
-    const limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize, 100*Math.PI/180, 120*Math.PI/180);
-    const view = new Marzipano.RectilinearView(data.initialViewParameters, limiter);
-
-    const scene = this.viewer.createScene({ source, geometry, view, pinFirstLevel: true });
-
-    // Create link hotspots.
-    data.linkHotspots.forEach((hotspot) => {
-      const element = this.createLinkHotspotElement(hotspot);
-      scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
-    });
-
-    // Create info hotspots.
-    data.infoHotspots.forEach((hotspot) => {
-      const element = this.createInfoHotspotElement(hotspot);
-      scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
-    });
-
-    return { data, scene, view };
   }
 
   toggleZoom() {
     if (!this._firstClick) {
       this._firstClick = true;
+      if (!environment.production) {
+        const p = this.viewer.scene().view().parameters();
+        console.log('[ViewComponent] Current crosshair');
+        console.log(`
+          {
+            "type": "PANORAMA",
+            "data": "${this._params.postalCode}/slug",
+            "position": { "yaw": ${p.yaw}, "pitch": ${p.pitch} }
+          }
+        `);
+      }
       setTimeout(() => this._firstClick = false, 250);
     } else {
       if (this._zoom === null) {
-        this._zoom = ZOOM_LEVELS.findIndex(fov => fov + 0.2 < this.viewer.scene().view().parameters().fov);
+        const currentFov = this.viewer.scene().view().fov();
+        this._zoom = ZOOM_LEVELS.findIndex(fov => fov < currentFov - 0.2);
         if (this._zoom === -1) this._zoom = 1;
       } else {
         this._zoom = (this._zoom + 1) % ZOOM_LEVELS.length;
@@ -108,12 +106,43 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  createLinkHotspotElement(hotspot: LinkHotspot) {
+  private createScene(data: Panorama) {
+    const basePath = `${environment.mediaUrl}/${data.media || data.id}`;
+    const source = Marzipano.ImageUrlSource.fromString(
+      `${basePath}/{z}/{f}/{y}/{x}.jpg`,
+      { cubeMapPreviewUrl: `${basePath}/preview.jpg` }
+    );
+    const geometry = new Marzipano.CubeGeometry(data.levels);
 
+    const limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize, 100*Math.PI/180, 120*Math.PI/180);
+    const view = new Marzipano.RectilinearView(data.initialViewParameters, limiter);
+
+    const scene = this.viewer.createScene({ source, geometry, view, pinFirstLevel: true });
+
+    // add hotspots to the current scene
+    this.addHotspots(scene, data);
+
+    return { data, scene, view };
   }
 
-  createInfoHotspotElement(hotspot: InfoHotspot) {
+  private addHotspots(scene: any, panorama: Panorama) {
+    if (!panorama.hotspots || !panorama.hotspots.length) return;
 
+    panorama.hotspots.forEach((hotspot) => {
+      var imgHotspot = document.createElement('img');
+      imgHotspot.src = '/assets/icons/hotspot.png';
+      imgHotspot.classList.add('hotspot');
+
+      imgHotspot.addEventListener('click', () => {
+        switch(hotspot.type) {
+          case HotspotType.PANORAMA:
+            this.router.navigateByUrl(`/panorama/${hotspot.data}`);
+            break;
+        }
+      });
+
+      scene.hotspotContainer().createHotspot(imgHotspot, hotspot.position);
+    });
   }
 
   ngOnDestroy(): void {

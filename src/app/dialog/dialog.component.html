@@ -3,5 +3,5 @@
   <p *ngFor="let p of data.paragraphs" class="light" [innerHTML]="p | html"></p>
 </div>
 <div mat-dialog-actions align="center">
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Entesos</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{ data.buttonText || 'Entesos' }}</button>
 </div>

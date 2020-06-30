@@ -1,5 +1,7 @@
 <mat-toolbar *ngIf="panorama">
   {{ panorama.label }} ({{ panorama.postalCode }})
+  <span class="spacer"></span>
+  <mat-slide-toggle [(ngModel)]="showHotspots"></mat-slide-toggle>
 </mat-toolbar>
 
 <div
@@ -11,5 +13,5 @@
 
 <div
   *ngIf="crosshair"
-  class="crosshair">
+  class="crosshair hotspot">
 </div>

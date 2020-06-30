@@ -90,6 +90,8 @@ mat-radio-button {
   min-height: 60vh;
 }
 
+// allow hiding / showing the view hotspots
+app-view:not(.hotspots) .hotspot { display: none !important }
 
 .background-dark { background-color: var(--color-dark) }
 .background-primary { background-color: var(--color-primary) }

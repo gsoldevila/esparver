@@ -28,13 +28,13 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "data": "17860/paratge-del-mas",
-        "position": { "yaw": 2.6733957610359163, "pitch": 0.10094591765045635 }
+        "position": { "yaw": 2.6733957610359163, "pitch": 0.10094591765045635 },
+        "data": "17860/paratge-del-mas"
       },
       {
         "type": "PANORAMA",
-        "data": "17860/can-salvatella",
-        "position": { "yaw": -3.128858603890613, "pitch": 0.11645849970996913 }
+        "position": { "yaw": -3.128858603890613, "pitch": 0.11645849970996913 },
+        "data": "17860/can-salvatella"
       }
     ]
   },
@@ -53,13 +53,13 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "data": "17860/el-mas",
-        "position": { "yaw": -1.309537561272636, "pitch": 0.03583104114591862 }
+        "position": { "yaw": -1.309537561272636, "pitch": 0.03583104114591862 },
+        "data": "17860/el-mas"
       },
       {
         "type": "PANORAMA",
-        "data": "17860/can-salvatella",
-        "position": { "yaw": 2.7504564597685253, "pitch": 0.19214550990750823 }
+        "position": { "yaw": 2.7504564597685253, "pitch": 0.19214550990750823 },
+        "data": "17860/can-salvatella"
       }
     ]
   },
@@ -78,18 +78,18 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "data": "17860/paratge-del-mas",
-        "position": { "yaw": -0.45216527751399127, "pitch": 0.00865602455723824 }
+        "position": { "yaw": -0.45216527751399127, "pitch": 0.00865602455723824 },
+        "data": "17860/paratge-del-mas"
       },
       {
         "type": "PANORAMA",
-        "data": "17860/el-mas",
-        "position": { "yaw": -1.5280601516601067, "pitch": -0.004884481188609513 }
+        "position": { "yaw": -1.5280601516601067, "pitch": -0.004884481188609513 },
+        "data": "17860/el-mas"
       },
       {
         "type": "PANORAMA",
-        "data": "17860/la-ruta-del-ferro",
-        "position": { "yaw": 1.4117388990734447, "pitch": 0.09552248690288856 }
+        "position": { "yaw": 1.4117388990734447, "pitch": 0.09552248690288856 },
+        "data": "17860/la-ruta-del-ferro"
       }
     ]
   },
@@ -135,13 +135,18 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "data": "17860/can-salvatella",
-        "position": { "yaw": -3.0640313062592632, "pitch": -0.01790830077973027 }
+        "position": { "yaw": -3.0640313062592632, "pitch": -0.01790830077973027 },
+        "data": "17860/can-salvatella"
       },
       {
         "type": "PANORAMA",
-        "data": "17860/la-ruta-amunt",
-        "position": { "yaw": 2.5186402381059985, "pitch": -1.0050102359881965 }
+        "position": { "yaw": 2.5186402381059985, "pitch": -1.0050102359881965 },
+        "data": "17860/la-ruta-amunt"
+      },
+      {
+        "type": "LINK",
+        "position": { "yaw": -0.44570059118508354, "pitch": 0.08163812390732339 },
+        "data": "https://www.rutadelferro.com/"
       }
     ]
   },
@@ -161,23 +166,23 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "data": "17860/la-ruta-del-ferro",
-        "position": { "yaw": -0.8010255210627442, "pitch": 0.7754861589940205 }
+        "position": { "yaw": -0.8010255210627442, "pitch": 0.7754861589940205 },
+        "data": "17860/la-ruta-del-ferro"
       },
       {
         "type": "PANORAMA",
-        "data": "17860/can-salvatella",
-        "position": { "yaw": -3.1353826372001734, "pitch": 0.4511824569133722 }
+        "position": { "yaw": -3.1353826372001734, "pitch": 0.4511824569133722 },
+        "data": "17860/can-salvatella"
       },
       {
         "type": "PANORAMA",
-        "data": "17860/paratge-del-mas",
-        "position": { "yaw": -2.817236552267218, "pitch": 0.19426806166216437 }
+        "position": { "yaw": -2.817236552267218, "pitch": 0.19426806166216437 },
+        "data": "17860/paratge-del-mas"
       },
       {
         "type": "PANORAMA",
-        "data": "17860/el-mas",
-        "position": { "yaw": 2.96265371820109, "pitch": 0.09760384483027629 }
+        "position": { "yaw": 2.96265371820109, "pitch": 0.09760384483027629 },
+        "data": "17860/el-mas"
       }
     ]
   },

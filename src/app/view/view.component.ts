@@ -1,12 +1,12 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostBinding } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as Marzipano from 'marzipano';
-import { Subscription } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
+import { ComponentWithSubscriptions } from '../service/base';
 import { PanoramaService } from '../service/panorama.service';
-import { Panorama, HotspotType } from '../model/panorama';
+import { Panorama, HotspotType, HOTSPOT_ICONS } from '../model/panorama';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
 
 
@@ -17,11 +17,10 @@ const ZOOM_LEVELS = [2, 1, 0, 1];
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.scss']
 })
-export class ViewComponent implements AfterViewInit, OnDestroy {
+export class ViewComponent extends ComponentWithSubscriptions implements AfterViewInit, OnDestroy {
   loading = true;
   private _params: { postalCode: string, slug: string };
   panorama: Panorama;
-  private _sub: Subscription;
   private scene: Marzipano.Scene;
   private viewer: Marzipano.Viewer;
   private autorotate;
@@ -29,20 +28,23 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   private _firstClick: boolean;
   @ViewChild('pano') view: ElementRef;
   crosshair: boolean = !environment.production;
+  @HostBinding('class.hotspots') showHotspots: boolean = true;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private panoramaService: PanoramaService
-  ) {}
+  ) {
+    super();
+  }
 
   ngAfterViewInit(): void {
     this.initMarzipano();
-    this._sub = this.route.params
+    this.registerSubscription(this.route.params
       .pipe(
         distinctUntilChanged(),
         tap((params: any) => this.switchScene(params)),
-      ).subscribe();
+      ).subscribe());
   }
 
   private initMarzipano() {
@@ -84,14 +86,12 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
       this._firstClick = true;
       if (!environment.production) {
         const p = this.viewer.scene().view().parameters();
-        console.log('[ViewComponent] Current crosshair');
-        console.log(`
-          {
+        console.log('[ViewComponent] Current crosshair', p);
+        console.log(`{
             "type": "PANORAMA",
-            "data": "${this._params.postalCode}/slug",
-            "position": { "yaw": ${p.yaw}, "pitch": ${p.pitch} }
-          }
-        `);
+            "position": { "yaw": ${p.yaw}, "pitch": ${p.pitch} },
+            "data": "${this._params.postalCode}/slug"
+          }`);
       }
       setTimeout(() => this._firstClick = false, 250);
     } else {
@@ -130,13 +130,16 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
 
     panorama.hotspots.forEach((hotspot) => {
       var imgHotspot = document.createElement('img');
-      imgHotspot.src = '/assets/icons/hotspot.png';
+      imgHotspot.src = `/assets/icons/${HOTSPOT_ICONS[hotspot.type]}.png`;
       imgHotspot.classList.add('hotspot');
 
       imgHotspot.addEventListener('click', () => {
         switch(hotspot.type) {
           case HotspotType.PANORAMA:
             this.router.navigateByUrl(`/panorama/${hotspot.data}`);
+            break;
+          case HotspotType.LINK:
+            window.open(hotspot.data, '_blank');
             break;
         }
       });
@@ -146,7 +149,7 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    super.ngOnDestroy();
     this.viewer.destroy();
-    this._sub && this._sub.unsubscribe();
   }
 }

@@ -48,6 +48,12 @@ export interface Hotspot {
 
 export enum HotspotType {
   PANORAMA = 'PANORAMA',
+  LINK = 'LINK',
+}
+
+export const HOTSPOT_ICONS = {
+  PANORAMA: 'hotspot',
+  LINK: 'info',
 }
 
 export interface HotspotPosition {

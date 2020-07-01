@@ -8,9 +8,9 @@ import { PanoramaService } from '../service/panorama.service';
 import { PositionService } from '../service/position.service';
 import { DialogService } from '../service/dialog.service';
 import { Panorama, PANORAMA_ICONS } from '../model/panorama';
+import { StorageService } from '../service/storage.service';
 import { POSTAL_CODES, PostalCode } from '../model/postal';
 import { GeolocationPositionError, GeolocationPositionErrorCode } from '../model/position';
-import { StorageService } from '../service/storage.service';
 
 
 @Component({

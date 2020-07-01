@@ -236,6 +236,46 @@
       "pitch": 0.4,
       "yaw": 1.1,
       "fov": 2
+    },
+    "hotspots": [
+      {
+        "type": "PANORAMA",
+        "position": { "yaw": 0.10529897666331856, "pitch": 0.07615115070603196 },
+        "data": "17860/el-salomo"
+      }
+    ]
+  },
+  {
+    "id": "17860/el-salomo",
+    "name": "Salomó, El",
+    "type": "HOUSE",
+    "timestamp": 1593602880028,
+    "latitude": 42.234785,
+    "longitude": 2.268099,
+    "initialViewParameters": {
+      "pitch": 0.85,
+      "yaw": -2.7,
+      "fov": 0.65
+    },
+    "hotspots": [
+      {
+        "type": "PANORAMA",
+        "position": { "yaw": -1.6141682034810287, "pitch": 0.19005704921458388 },
+        "data": "17860/la-serra-del-cadell"
+      }
+    ]
+  },
+  {
+    "id": "17860/la-ginebrosa",
+    "name": "Ginebrosa, La",
+    "type": "HOUSE",
+    "timestamp": 1593602908028,
+    "latitude": 42.230513,
+    "longitude": 2.264239,
+    "initialViewParameters": {
+      "pitch": 0.65,
+      "yaw": -1.5,
+      "fov": 2
     }
   }
 ]

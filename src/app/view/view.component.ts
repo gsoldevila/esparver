@@ -1,13 +1,13 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostBinding } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as Marzipano from 'marzipano';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
 import { PanoramaService } from '../service/panorama.service';
 import { Panorama, HotspotType, HOTSPOT_ICONS } from '../model/panorama';
-import { distinctUntilChanged, tap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 
 
 const ZOOM_LEVELS = [2, 1, 0, 1];
@@ -49,7 +49,12 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
 
   private initMarzipano() {
     // Initialize viewer.
-    this.viewer = new Marzipano.Viewer(this.view.nativeElement, { controls: { mouseViewMode: 'drag' } });
+    this.viewer = new Marzipano.Viewer(
+      this.view.nativeElement,
+      { controls: { mouseViewMode: 'drag' } }
+    );
+
+    // Create an autorotate motion
     this.autorotate = Marzipano.autorotate({
       yawSpeed: 0.1,         // Yaw rotation speed
       targetPitch: 0,        // Pitch value to converge to
@@ -114,12 +119,24 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
     );
     const geometry = new Marzipano.CubeGeometry(data.levels);
 
-    const limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize, 100*Math.PI/180, 120*Math.PI/180);
-    const view = new Marzipano.RectilinearView(data.initialViewParameters, limiter);
+    const limiter = Marzipano.RectilinearView.limit.traditional(
+      data.faceSize,
+      100 * Math.PI/180,
+      120 * Math.PI/180,
+    );
 
-    const scene = this.viewer.createScene({ source, geometry, view, pinFirstLevel: true });
+    const view = new Marzipano.RectilinearView(
+      data.initialViewParameters,
+      limiter,
+    );
 
-    // add hotspots to the current scene
+    const scene = this.viewer.createScene({
+      source,
+      geometry,
+      view,
+      pinFirstLevel: true,
+    });
+
     this.addHotspots(scene, data);
 
     return { data, scene, view };

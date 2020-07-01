@@ -1,32 +1,62 @@
 <ng-container *ngIf="(model$ | async) as model; else loading">
   <mat-toolbar color="accent">
     A vista d'ocell
+
     <span class="spacer"></span>
-    <button *ngIf="locationError" mat-icon-button class="no-border no-background" (click)="enableGeolocation()">
-      <span class="material-icons">location_off</span>
+
+    <button
+      *ngIf="locationError"
+      mat-icon-button
+      class="no-border no-background"
+      (click)="enableGeolocation()">
+        <span class="material-icons">location_off</span>
     </button>
-    <button mat-icon-button class="no-border no-background" [matMenuTriggerFor]="opcions">
-      <span class="material-icons">filter_alt</span>
+
+    <button
+      mat-icon-button
+      class="no-border no-background"
+      [matMenuTriggerFor]="opcions">
+        <span class="material-icons">filter_alt</span>
     </button>
+
     <mat-menu #opcions="matMenu">
-      <div class="smaller color-medium-gray pl-05 italic">ORDENA</div>
+      <div class="smaller color-medium-gray pl-05 italic">
+        ORDENA
+      </div>
+
       <mat-radio-group>
-        <mat-radio-button class="block p-1" [checked]="order === 0" (click)="order = 0" [value]="0">
-          <span>Alfabèticament</span>
+        <mat-radio-button
+          class="block p-1"
+          [checked]="order === 0"
+          (click)="order = 0"
+          [value]="0">
+            <span>Alfabèticament</span>
         </mat-radio-button>
 
-        <mat-radio-button class="block p-1" [checked]="order === 1" (click)="order = 1" [value]="1" [disabled]="locationError && locationError.code === 1">
-          <span>Les més properes</span>
+        <mat-radio-button
+          class="block p-1"
+          [checked]="order === 1"
+          (click)="order = 1"
+          [value]="1"
+          [disabled]="locationError && locationError.code === 1">
+            <span>Les més properes</span>
         </mat-radio-button>
 
-        <mat-radio-button class="block p-1" [checked]="order === 2" (click)="order = 2" [value]="2">
-          <span>Les més recents</span>
+        <mat-radio-button
+          class="block p-1"
+          [checked]="order === 2"
+          (click)="order = 2"
+          [value]="2">
+            <span>Les més recents</span>
         </mat-radio-button>
       </mat-radio-group>
 
       <mat-divider></mat-divider>
 
-      <div class="smaller color-medium-gray pl-05 pt-05 italic">CODIS POSTALS</div>
+      <div class="smaller color-medium-gray pl-05 pt-05 italic">
+        CODIS POSTALS
+      </div>
+
       <mat-checkbox
         *ngFor="let code of model.codes; index as i"
         class="block p-1"
@@ -38,15 +68,31 @@
   </mat-toolbar>
 
   <mat-action-list>
-    <button mat-list-item *ngFor="let panorama of model.panoramas" (click)="showPanorama(panorama)">
-      <div mat-line class="large">{{ order ? panorama.label : panorama.name }}</div>
-      <div mat-line class="color-dark-gray">{{ POSTAL_CODES[panorama.postalCode] }} ({{ panorama.postalCode }})</div>
-      <div mat-line *ngIf="panorama.distance" class="italic">
-        <b *ngIf="panorama.distance < 1">{{ (panorama.distance * 1000) | number:'1.0-0'}} metres</b>
-        <b *ngIf="panorama.distance >= 1">{{ panorama.distance | number:'1.0-2'}} kms</b>
-         en línia recta
-      </div>
-      <span class="material-icons">{{ PANORAMA_ICONS[panorama.type] || 'photo_camera' }}</span>
+    <button
+      mat-list-item
+      *ngFor="let panorama of model.panoramas"
+      (click)="showPanorama(panorama)">
+        <div mat-line class="large">
+          {{ order ? panorama.label : panorama.name }}
+        </div>
+
+        <div mat-line class="color-dark-gray">
+          {{ POSTAL_CODES[panorama.postalCode] }} ({{ panorama.postalCode }})
+        </div>
+
+        <div mat-line *ngIf="panorama.distance" class="italic">
+          <b *ngIf="panorama.distance < 1">
+            {{ (panorama.distance * 1000) | number:'1.0-0'}} metres
+          </b>
+          <b *ngIf="panorama.distance >= 1">
+            {{ panorama.distance | number:'1.0-2'}} kms
+          </b>
+          en línia recta
+        </div>
+
+        <span class="material-icons">
+          {{ PANORAMA_ICONS[panorama.type] || 'photo_camera' }}
+        </span>
     </button>
   </mat-action-list>
 </ng-container>

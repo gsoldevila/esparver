@@ -13,6 +13,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     if (this.updates.isEnabled) {
+      this.updates.checkForUpdate();
       this.updates.available.subscribe(version => this.showUpdateDialog(version));
     }
   }

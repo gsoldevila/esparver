@@ -1,0 +1,28 @@
+<ng-container *ngIf="(model$ | async) as model; else loading">
+  <ng-container *ngIf="!markdown">
+    <div class="larger">
+        {{ model.title }}
+      </div>
+      <div class="italic color-dark-gray" *ngIf="model.subtitle">
+        {{ model.subtitle }}
+      </div>
+
+    <mat-nav-list>
+      <a
+        *ngFor="let action of model.actions"
+        mat-list-item
+        (click)="doAction(action)">
+        <div mat-line>{{ ACTION_LABELS[action.type] }}</div>
+        <span class="material-icons">
+          {{ action.icon }}
+        </span>
+      </a>
+    </mat-nav-list>
+  </ng-container>
+
+  <markdown *ngIf="markdown" [src]="markdown" (load)="onLoad($event)" (error)="onError($event)"></markdown>
+</ng-container>
+
+<ng-template #loading>
+  <div class="loading"></div>
+</ng-template>

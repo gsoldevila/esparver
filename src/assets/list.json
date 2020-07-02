@@ -146,7 +146,10 @@
       {
         "type": "LINK",
         "position": { "yaw": -0.44570059118508354, "pitch": 0.08163812390732339 },
-        "data": "https://www.rutadelferro.com/"
+        "data": {
+          "title": "Alberg Rural Ruta del Ferro",
+          "url": "https://www.rutadelferro.com/"
+        }
       }
     ]
   },
@@ -242,6 +245,11 @@
         "type": "PANORAMA",
         "position": { "yaw": 0.10529897666331856, "pitch": 0.07615115070603196 },
         "data": "17860/el-salomo"
+      },
+      {
+        "type": "PANORAMA",
+        "position": { "yaw": -0.5805597935918883, "pitch": 0.12290445687088791 },
+        "data": "17860/la-ginebrosa"
       }
     ]
   },
@@ -269,6 +277,9 @@
     "id": "17860/la-ginebrosa",
     "name": "Ginebrosa, La",
     "type": "HOUSE",
+    "description": {
+      "type": "EMBEDDED_MARKDOWN"
+    },
     "timestamp": 1593602908028,
     "latitude": 42.230513,
     "longitude": 2.264239,
@@ -276,6 +287,18 @@
       "pitch": 0.65,
       "yaw": -1.5,
       "fov": 2
-    }
+    },
+    "hotspots": [
+      {
+        "type": "PANORAMA",
+        "position": { "yaw": -1.5221799017913185, "pitch": 0.3642330626135859 },
+        "data": "17860/la-ginebrosa"
+      },
+      {
+        "type": "PANORAMA",
+        "position": { "yaw": 0.5820552978015954, "pitch": -0.002508986995692908 },
+        "data": "17860/la-serra-del-cadell"
+      }
+    ]
   }
 ]

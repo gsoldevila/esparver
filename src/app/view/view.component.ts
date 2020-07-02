@@ -7,7 +7,8 @@ import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 import { PanoramaService } from '../service/panorama.service';
-import { Panorama, HotspotType, HOTSPOT_ICONS } from '../model/panorama';
+import { HotspotService } from '../service/hotspot.service';
+import { Panorama } from '../model/panorama';
 
 
 const ZOOM_LEVELS = [2, 1, 0, 1];
@@ -35,7 +36,8 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private panoramaService: PanoramaService
+    private panoramaService: PanoramaService,
+    private hotspotService: HotspotService,
   ) {}
 
   ngAfterViewInit(): void {
@@ -147,20 +149,9 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
 
     panorama.hotspots.forEach((hotspot) => {
       var imgHotspot = document.createElement('img');
-      imgHotspot.src = `/assets/icons/${HOTSPOT_ICONS[hotspot.type]}.png`;
+      imgHotspot.src = `/assets/icons/info.png`;
       imgHotspot.classList.add('hotspot');
-
-      imgHotspot.addEventListener('click', () => {
-        switch(hotspot.type) {
-          case HotspotType.PANORAMA:
-            this.router.navigateByUrl(`/panorama/${hotspot.data}`);
-            break;
-          case HotspotType.LINK:
-            window.open(hotspot.data, '_blank');
-            break;
-        }
-      });
-
+      imgHotspot.addEventListener('click', () => this.hotspotService.hotspotClicked(panorama, hotspot));
       scene.hotspotContainer().createHotspot(imgHotspot, hotspot.position);
     });
   }

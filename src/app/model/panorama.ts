@@ -2,9 +2,11 @@ export interface Panorama {
   id: string;
   media?: string;
   postalCode?: string;
+  type: PanoramaType;
   slug?: string;
   name: string;
   label?: string;
+  description?: Description;
   index?: boolean;
   timestamp: number;
   latitude: number;
@@ -14,6 +16,15 @@ export interface Panorama {
   initialViewParameters: PitchYawFov;
   hotspots?: Hotspot[];
   levels?: Level[];
+}
+
+export interface Description {
+  type: DescriptionType;
+  data: any;
+}
+
+export enum DescriptionType {
+  EMBEDDED_MARKDOWN = 'EMBEDDED_MARKDOWN',
 }
 
 export enum PanoramaType {

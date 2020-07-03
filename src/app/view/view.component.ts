@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostBinding } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import * as Marzipano from 'marzipano';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -31,10 +31,10 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
   private _firstClick: boolean;
   @ViewChild('pano') view: ElementRef;
   crosshair: boolean = !environment.production;
-  @HostBinding('class.hotspots') showHotspots: boolean = true;
+  private _showHotspots: boolean;
+  @HostBinding('class.hotspots') showHotspots: boolean;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private panoramaService: PanoramaService,
     private hotspotService: HotspotService,
@@ -66,6 +66,8 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
 
   async switchScene(params) {
     this._params = params;
+    this._showHotspots = this.showHotspots;
+    this.showHotspots = false;
 
     console.debug('[ViewComponent] Switching to scene', params);
     this.viewer.stopMovement();
@@ -81,6 +83,7 @@ export class ViewComponent implements AfterViewInit, OnDestroy {
     this.scene.scene.switchTo();
     setTimeout(() => {
       this.loading = false;
+      this.showHotspots = typeof this._showHotspots === 'boolean' ? this._showHotspots : true;
       if (environment.production) {
         this.viewer.startMovement(this.autorotate);
         this.viewer.setIdleMovement(3000, this.autorotate);

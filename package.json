@@ -25,7 +25,7 @@
     "@angular/service-worker": "^10.0.2",
     "hammerjs": "^2.0.8",
     "lodash": "^4.17.15",
-    "marzipano": "^0.9.1",
+    "marzipano": "github:gsoldevila/marzipano",
     "ngx-markdown": "^10.0.0",
     "node-abi": "^2.18.0",
     "rxjs": "^6.5.5",

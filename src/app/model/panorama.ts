@@ -54,6 +54,7 @@ export interface PitchYawFov {
 export interface Hotspot {
   type: HotspotType;
   position: HotspotPosition;
+  fovThreshold?: number;
   data: any;
 }
 

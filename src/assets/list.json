@@ -28,12 +28,14 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "position": { "yaw": 2.6733957610359163, "pitch": 0.10094591765045635 },
+        "position": { "yaw": 2.64, "pitch": 0.18 },
+        "fovThreshold": 0.5,
         "data": "17860/paratge-del-mas"
       },
       {
         "type": "PANORAMA",
-        "position": { "yaw": -3.128858603890613, "pitch": 0.11645849970996913 },
+        "position": { "yaw": -3.12, "pitch": 0.17 },
+        "fovThreshold": 0.5,
         "data": "17860/can-salvatella"
       }
     ]
@@ -53,12 +55,14 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "position": { "yaw": -1.309537561272636, "pitch": 0.03583104114591862 },
+        "position": { "yaw": -1.32, "pitch": 0.09 },
+        "fovThreshold": 0.6,
         "data": "17860/el-mas"
       },
       {
         "type": "PANORAMA",
-        "position": { "yaw": 2.7504564597685253, "pitch": 0.19214550990750823 },
+        "position": { "yaw": 2.77, "pitch": 0.19 },
+        "fovThreshold": 1.1,
         "data": "17860/can-salvatella"
       }
     ]
@@ -78,17 +82,20 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "position": { "yaw": -0.45216527751399127, "pitch": 0.00865602455723824 },
+        "position": { "yaw": -0.42, "pitch": 0.03 },
+        "fovThreshold": 1.1,
         "data": "17860/paratge-del-mas"
       },
       {
         "type": "PANORAMA",
-        "position": { "yaw": -1.5280601516601067, "pitch": -0.004884481188609513 },
+        "position": { "yaw": -1.54, "pitch": 0.01 },
+        "fovThreshold": 0.5,
         "data": "17860/el-mas"
       },
       {
         "type": "PANORAMA",
-        "position": { "yaw": 1.4117388990734447, "pitch": 0.09552248690288856 },
+        "position": { "yaw": 1.4, "pitch": 0.12 },
+        "fovThreshold": 0.5,
         "data": "17860/la-ruta-del-ferro"
       }
     ]
@@ -135,17 +142,25 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "position": { "yaw": -3.0640313062592632, "pitch": -0.01790830077973027 },
+        "position": { "yaw": -3.05, "pitch": -0.01 },
+        "fovThreshold": 0.9,
         "data": "17860/can-salvatella"
       },
       {
         "type": "PANORAMA",
-        "position": { "yaw": 2.5186402381059985, "pitch": -1.0050102359881965 },
+        "position": { "yaw": 2.58, "pitch": -0.96 },
         "data": "17860/la-ruta-amunt"
       },
       {
+        "type": "PANORAMA",
+        "position": { "yaw": -2.6, "pitch": -0.05 },
+        "fovThreshold": 0.4,
+        "data": "17860/paratge-del-mas"
+      },
+      {
         "type": "LINK",
-        "position": { "yaw": -0.44570059118508354, "pitch": 0.08163812390732339 },
+        "position": { "yaw": -0.44, "pitch": 0.1 },
+        "fovThreshold": 0.7,
         "data": {
           "title": "Alberg Rural Ruta del Ferro",
           "url": "https://www.rutadelferro.com/"
@@ -169,22 +184,25 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "position": { "yaw": -0.8010255210627442, "pitch": 0.7754861589940205 },
+        "position": { "yaw": -1.30, "pitch": 0.86 },
         "data": "17860/la-ruta-del-ferro"
       },
       {
         "type": "PANORAMA",
-        "position": { "yaw": -3.1353826372001734, "pitch": 0.4511824569133722 },
+        "position": { "yaw": 3.13, "pitch": 0.45 },
+        "fovThreshold": 1,
         "data": "17860/can-salvatella"
       },
       {
         "type": "PANORAMA",
-        "position": { "yaw": -2.817236552267218, "pitch": 0.19426806166216437 },
+        "position": { "yaw": -2.83, "pitch": 0.2 },
+        "fovThreshold": 0.7,
         "data": "17860/paratge-del-mas"
       },
       {
         "type": "PANORAMA",
-        "position": { "yaw": 2.96265371820109, "pitch": 0.09760384483027629 },
+        "position": { "yaw": 2.95, "pitch": 0.11 },
+        "fovThreshold": 0.4,
         "data": "17860/el-mas"
       }
     ]
@@ -243,12 +261,14 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "position": { "yaw": 0.10529897666331856, "pitch": 0.07615115070603196 },
+        "position": { "yaw": 0.07, "pitch": 0.12 },
+        "fovThreshold": 0.7,
         "data": "17860/el-salomo"
       },
       {
         "type": "PANORAMA",
-        "position": { "yaw": -0.5805597935918883, "pitch": 0.12290445687088791 },
+        "position": { "yaw": -0.57, "pitch": 0.12 },
+        "fovThreshold": 0.4,
         "data": "17860/la-ginebrosa"
       }
     ]
@@ -268,8 +288,15 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "position": { "yaw": -1.6141682034810287, "pitch": 0.19005704921458388 },
+        "position": { "yaw": -1.62, "pitch": 0.19 },
+        "fovThreshold": 0.7,
         "data": "17860/la-serra-del-cadell"
+      },
+      {
+        "type": "PANORAMA",
+        "position": { "yaw": 0.98, "pitch": 0.11 },
+        "fovThreshold": 0.4,
+        "data": "17860/la-ginebrosa"
       }
     ]
   },
@@ -291,12 +318,13 @@
     "hotspots": [
       {
         "type": "PANORAMA",
-        "position": { "yaw": -1.5221799017913185, "pitch": 0.3642330626135859 },
+        "position": { "yaw": -1, "pitch": 0.40 },
         "data": "17860/la-ginebrosa"
       },
       {
         "type": "PANORAMA",
-        "position": { "yaw": 0.5820552978015954, "pitch": -0.002508986995692908 },
+        "position": { "yaw": 0.58, "pitch": 0 },
+        "fovThreshold": 0.4,
         "data": "17860/la-serra-del-cadell"
       }
     ]
